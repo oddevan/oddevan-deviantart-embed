@@ -1,11 +1,11 @@
 {
   "name": "oddevan/deviant-art-embed",
-  "description": "A block starter for WebDevStudios projects.",
+  "description": "A block for embedding a post from DeviantArt.",
   "type": "wordpress-plugin",
   "authors": [
     {
-      "name": "WebDevStudios",
-      "email": "contact@webdevstudios.com"
+      "name": "Evan Hildreth",
+      "email": "me@eph.me"
     }
   ],
   "require": {},

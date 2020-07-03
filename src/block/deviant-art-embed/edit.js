@@ -1,31 +1,25 @@
 /**
  * EDIT: oddEvan Deviant Art Embed
  */
-import { RichText } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const Edit = ( props ) => {
 	const {
 		attributes: {
-			content,
+			url,
 		},
 		className,
 		setAttributes,
 	} = props;
 
-	// Update field content on change.
-	const onChangeContent = ( newContent ) => {
-		setAttributes( { content: newContent } );
-	};
-
 	return (
-		<RichText
-			tagName="p"
-			className={ className }
-			onChange={ onChangeContent }
-			value={ content }
-			placeholder={ __( 'oddEvan Deviant Art Embed Demo...', 'deviant-art-embed' ) }
-		/>
+		<TextControl
+      label={__('DeviantArt post', 'deviant-art-embed')}
+      className={className}
+      value={url}
+      onChange={(url) => setAttributes({ url })}
+    />
 	);
 };
 
