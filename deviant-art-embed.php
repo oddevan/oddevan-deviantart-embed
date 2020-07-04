@@ -13,6 +13,10 @@
 
 namespace oddEvan\DeviantArtEmbed;
 
+use WP_REST_Request;
+use WP_REST_Response;
+use WP_Error;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -86,3 +90,41 @@ function register_block() {
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\register_block' );
+
+/**
+ * Proxy the call to DeviantArt's oEmbed API. This resolves an issue where
+ * their API server is not properly configured for CORS.
+ *
+ * @author Evan Hildreth <me@eph.me>
+ * @since 1.0.0
+ *
+ * @param WP_REST_Request $data Data from REST request.
+ * @return WP_REST_Response Fetched JSON object from DeviantArt
+ */
+function proxy_deviantart_oembed( $data ) {
+	// TODO validate URL.
+
+	$da_response = wp_remote_get(
+		'https://backend.deviantart.com/oembed?url=' . $data->get_param( 'url' ),
+		[ 'headers' => [ 'User-Agent' => 'WordPress OEmbed Consumer' ] ]
+	);
+
+	if ( empty( $da_response ) || 200 !== $da_response['response']['code'] ) {
+		return new WP_Error(
+			'error',
+			'Error in response from DeviantArt',
+			[
+				'input'    => $data,
+				'response' => $da_response,
+			]
+		);
+	}
+
+	return new WP_REST_Response( json_decode( $da_response['body'] ) );
+}
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'oddevan/v1', '/devArtProxy/', array(
+		'methods'  => 'GET',
+		'callback' => __NAMESPACE__ . '\proxy_deviantart_oembed',
+	) );
+} );

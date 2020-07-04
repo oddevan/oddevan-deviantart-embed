@@ -1,7 +1,7 @@
 /**
  * SAVE: oddEvan Deviant Art Embed
  */
-import { RichText } from '@wordpress/block-editor';
+import apiFetch from '@wordpress/api-fetch';
 
 const Save = ( props ) => {
 	const {
@@ -11,9 +11,9 @@ const Save = ( props ) => {
 		className,
 	} = props;
 
-	const oEmbedUrl = `https://backend.deviantart.com/oembed?url=${encodeURIComponent(url)}`;
+	const oEmbedUrl = `oddevan/v1/devArtProxy?url=${encodeURIComponent(url)}`;
 	console.log('eph', oEmbedUrl);
-	fetch(oEmbedUrl)
+	apiFetch({ path: oEmbedUrl })
 		.then(data => console.log('Success', data))
 		.catch(data => console.log('Error', data));
 
