@@ -68,7 +68,7 @@ function register_block() {
 	}
 
 	// Register block with WordPress.
-	register_block_type( 'odd-evan/deviant-art-embed', array(
+	register_block_type( 'oddevan/deviant-art-embed', array(
 		'editor_script' => 'deviant-art-embed-editor-script',
 		'editor_style'  => 'deviant-art-embed-editor-style',
 		'style'         => 'deviant-art-embed-style',

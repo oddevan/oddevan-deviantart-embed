@@ -7,7 +7,7 @@ import save from './save';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
-registerBlockType( 'odd-evan/deviant-art-embed', {
+registerBlockType( 'oddevan/deviant-art-embed', {
 	title: __( 'Deviant Art', 'deviant-art-embed' ),
 	icon: 'edit',
 	category: 'embed',
