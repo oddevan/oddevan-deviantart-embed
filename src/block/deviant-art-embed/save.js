@@ -3,6 +3,8 @@
  */
 import apiFetch from '@wordpress/api-fetch';
 
+const { __ } = wp.i18n;
+
 async function getEmbedObject(url) {
 	const oEmbedUrl = `oddevan/v1/devArtProxy?url=${encodeURIComponent(url)}`;
 
@@ -18,19 +20,46 @@ async function getEmbedObject(url) {
 const Save = async ( props ) => {
 	const {
 		attributes: {
-			url,
+			embedUrl,
 		},
 		className,
 	} = props;
+	
+	const daResponse = await getEmbedObject(embedUrl);
 
+	if (!daResponse) {
+		return (
+			<div class={className}>
+			</div>
+		)
+	}
 	
-	const daResponse = await getEmbedObject(url);
-	
-	console.log({response: daResponse});
+	const {
+		author_name,
+		author_url,
+		height,
+		title,
+		url,
+		width,
+	} = daResponse;
 
 	return (
 		<div class={className}>
-			Working on it...
+			<img
+				src={url}
+				width={width}
+				height={height}
+				alt={title}
+			/>
+			<p>
+				<a href={embedUrl}>
+					{title}
+				</a>
+				{__(' by ', 'deviant-art-embed')}
+				<a href={author_url}>
+					{author_name}
+				</a>
+			</p>
 		</div>
 	);
 };

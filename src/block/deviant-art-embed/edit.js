@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 const Edit = ( props ) => {
 	const {
 		attributes: {
-			url,
+			embedUrl,
 		},
 		className,
 		setAttributes,
@@ -17,8 +17,8 @@ const Edit = ( props ) => {
 		<TextControl
       label={__('DeviantArt post', 'deviant-art-embed')}
       className={className}
-      value={url}
-      onChange={(url) => setAttributes({ url })}
+      value={embedUrl}
+      onChange={(embedUrl) => setAttributes({ embedUrl })}
     />
 	);
 };
