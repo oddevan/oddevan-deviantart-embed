@@ -18,8 +18,7 @@ registerBlockType( 'oddevan/deviant-art-embed', {
 	],
 	attributes: {
 		url: {
-			type: 'string',
-			source: 'attribute',
+			type: 'string'
 		},
 	},
 	edit,

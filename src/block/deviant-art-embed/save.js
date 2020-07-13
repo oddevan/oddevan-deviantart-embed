@@ -3,7 +3,19 @@
  */
 import apiFetch from '@wordpress/api-fetch';
 
-const Save = ( props ) => {
+async function getEmbedObject(url) {
+	const oEmbedUrl = `oddevan/v1/devArtProxy?url=${encodeURIComponent(url)}`;
+
+	try {
+		const response = await apiFetch({ path: oEmbedUrl });
+		return response;
+	} catch(e) {
+		console.log('Error in DA block', { url: oEmbedUrl, error: e });
+		return {}
+	}
+}
+
+const Save = async ( props ) => {
 	const {
 		attributes: {
 			url,
@@ -11,16 +23,15 @@ const Save = ( props ) => {
 		className,
 	} = props;
 
-	const oEmbedUrl = `oddevan/v1/devArtProxy?url=${encodeURIComponent(url)}`;
-	console.log('eph', oEmbedUrl);
-	apiFetch({ path: oEmbedUrl })
-		.then(data => console.log('Success', data))
-		.catch(data => console.log('Error', data));
+	
+	const daResponse = await getEmbedObject(url);
+	
+	console.log({response: daResponse});
 
 	return (
-		<div
-			class={className}
-		>Coming soon</div>
+		<div class={className}>
+			Working on it...
+		</div>
 	);
 };
 
