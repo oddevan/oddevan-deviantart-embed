@@ -2,6 +2,7 @@
  * SAVE: oddEvan Deviant Art Embed
  */
 import apiFetch from '@wordpress/api-fetch';
+import DeviantArtEmbed from './DeviantArtEmbed';
 
 const { __ } = wp.i18n;
 
@@ -24,42 +25,23 @@ const Save = async ( props ) => {
 		},
 		className,
 	} = props;
+
+	console.log('Saving DA Embed', props);
 	
 	const daResponse = await getEmbedObject(embedUrl);
 
 	if (!daResponse) {
+		console.log('No response, outputting blank div', daResponse);
 		return (
 			<div class={className}>
 			</div>
 		)
 	}
-	
-	const {
-		author_name,
-		author_url,
-		height,
-		title,
-		url,
-		width,
-	} = daResponse;
 
+	console.log('Calling DeviantArtEmbed component');
 	return (
-		<div class={className}>
-			<img
-				src={url}
-				width={width}
-				height={height}
-				alt={title}
-			/>
-			<p>
-				<a href={embedUrl}>
-					{title}
-				</a>
-				{__(' by ', 'deviant-art-embed')}
-				<a href={author_url}>
-					{author_name}
-				</a>
-			</p>
+		<div className={className}>
+			<DeviantArtEmbed response={daResponse} />
 		</div>
 	);
 };

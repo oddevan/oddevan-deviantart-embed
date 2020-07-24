@@ -14,12 +14,13 @@ const Edit = ( props ) => {
 	} = props;
 
 	return (
-		<TextControl
-      label={__('DeviantArt post', 'deviant-art-embed')}
-      className={className}
-      value={embedUrl}
-      onChange={(embedUrl) => setAttributes({ embedUrl })}
-    />
+		<div className={className}>
+			<TextControl
+				label={__('DeviantArt post', 'deviant-art-embed')}
+				value={embedUrl}
+				onChange={(embedUrl) => setAttributes({ embedUrl })}
+			/>
+		</div>
 	);
 };
 
