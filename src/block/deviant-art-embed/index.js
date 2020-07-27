@@ -20,6 +20,10 @@ registerBlockType( 'oddevan/deviant-art-embed', {
 		embedUrl: {
 			type: 'string'
 		},
+		embedData: {
+			type: 'object',
+			default: {}
+		},
 	},
 	edit,
 	save,

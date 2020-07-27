@@ -1,4 +1,5 @@
 const { Fragment } = wp.components;
+const { __ } = wp.i18n;
 
 const DeviantArtEmbed = (props) => {
 	console.log('Outputting DA Embed', props);
@@ -21,7 +22,7 @@ const DeviantArtEmbed = (props) => {
 				alt={title}
 			/>
 			<p>
-				<a href={embedUrl}>
+				<a href={url}>
 					{title}
 				</a>
 				{__(' by ', 'deviant-art-embed')}
