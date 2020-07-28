@@ -1,24 +1,22 @@
 /**
  * EDIT: oddEvan Deviant Art Embed
  */
-import { TextControl } from '@wordpress/components';
+import { TextControl, Fragment } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 
 import { useEffect } from 'react';
 import DeviantArtEmbed from './DeviantArtEmbed';
 
-async function getEmbedObject(url, setAttributes) {
+async function fetchAndSetResponse(url, setAttributes) {
 	const oEmbedUrl = `oddevan/v1/devArtProxy?url=${encodeURIComponent(url)}`;
 
 	try {
 		const response = await apiFetch({ path: oEmbedUrl });
-		console.log(response);
 		setAttributes({ embedData: response });
-		return response;
 	} catch(e) {
 		console.log('Error in DA block', { url: oEmbedUrl, error: e });
-		return {}
+		setAttributes({ embedData: {} });
 	}
 }
 
@@ -33,18 +31,19 @@ const Edit = ( props ) => {
 	} = props;
 
 	useEffect(() => {
-		if (embedUrl !== '') {
-			const getDaResponse = async () => {
-				const result = await getEmbedObject(embedUrl, setAttributes);
-				return result;
-			};
-			const daResponse = getDaResponse();
-			console.log('daResponse', daResponse);
-			if (daResponse) {
-				setAttributes({ embedData: daResponse });
-			}
-		}
+		setAttributes({ embedData: {} });
+		fetchAndSetResponse(embedUrl, setAttributes);
 	}, [embedUrl]);
+
+	const showEmbed = (embedData.hasOwnProperty('url'));
+	const {
+		author_name,
+		author_url,
+		height,
+		title,
+		url,
+		width,
+	} = embedData;
 
 	return (
 		<div className={className}>
@@ -53,7 +52,27 @@ const Edit = ( props ) => {
 				value={embedUrl}
 				onChange={(embedUrl) => setAttributes({ embedUrl })}
 			/>
-			{/*embedData && <DeviantArtEmbed response={embedData} />*/}
+			{showEmbed ? (
+				<div className="deviantart-embed">
+					<img
+						src={url}
+						width={width}
+						height={height}
+						alt={title}
+					/>
+					<p>
+						<a href={embedUrl}>
+							{title}
+						</a>
+						{__(' by ', 'deviant-art-embed')}
+						<a href={author_url}>
+							{author_name}
+						</a>
+					</p>
+				</div>
+			) : (
+				<div className="deviantart-embed" />
+			)}
 		</div>
 	);
 };
