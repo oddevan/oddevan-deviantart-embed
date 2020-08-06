@@ -7,6 +7,8 @@ import apiFetch from '@wordpress/api-fetch';
 
 import { useEffect } from 'react';
 import DeviantArtEmbed from './DeviantArtEmbed';
+import DaLogo from './DaLogo';
+import DaWordmark from './DaWordmark';
 
 async function fetchAndSetResponse(url, setAttributes) {
 	const oEmbedUrl = `oddevan/v1/devArtProxy?url=${encodeURIComponent(url)}`;
@@ -53,14 +55,25 @@ const Edit = ( props ) => {
 				onChange={(embedUrl) => setAttributes({ embedUrl })}
 			/>
 			{showEmbed ? (
-				<div className="deviantart-embed">
-					<img
-						src={url}
-						width={width}
-						height={height}
-						alt={title}
-					/>
-					<p>
+				<div className="oddevan-deviantart-embed">
+					<p className="deviantart-header">
+						<span className="deviantart-logo">
+							<DaLogo />
+						</span>
+						<span className="deviantart-wordmark">
+							<DaWordmark />
+						</span>
+					</p>
+					<a href={embedUrl}>
+						<img
+							className="deviation"
+							src={url}
+							width={width}
+							height={height}
+							alt={title}
+						/>
+					</a>
+					<p className="deviation-title">
 						<a href={embedUrl}>
 							{title}
 						</a>
