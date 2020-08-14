@@ -49,11 +49,13 @@ const Edit = ( props ) => {
 
 	return (
 		<div className={className}>
-			<TextControl
-				label={__('DeviantArt post', 'deviant-art-embed')}
-				value={embedUrl}
-				onChange={(embedUrl) => setAttributes({ embedUrl })}
-			/>
+			<div className="oddevan-deviantart-control">
+				<TextControl
+					label={__('DeviantArt post', 'deviant-art-embed')}
+					value={embedUrl}
+					onChange={(embedUrl) => setAttributes({ embedUrl })}
+				/>
+			</div>
 			{showEmbed ? (
 				<div className="oddevan-deviantart-embed">
 					<p className="deviantart-header">
