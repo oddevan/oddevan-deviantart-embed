@@ -102,7 +102,14 @@ add_action( 'init', __NAMESPACE__ . '\register_block' );
  * @return WP_REST_Response Fetched JSON object from DeviantArt
  */
 function proxy_deviantart_oembed( $data ) {
-	// TODO validate URL.
+	$url = $data->get_param( 'url' );
+	if ( ! is_valid_url( $url ) ) {
+		return new WP_Error(
+			'error',
+			'Error: not a DeviantArt URL',
+			[ 'input' => $data ],
+		);
+	}
 
 	$da_response = wp_remote_get(
 		'https://backend.deviantart.com/oembed?url=' . $data->get_param( 'url' ),
@@ -122,9 +129,56 @@ function proxy_deviantart_oembed( $data ) {
 
 	return new WP_REST_Response( json_decode( $da_response['body'] ) );
 }
+
+/**
+ * Security check for the DeviantArt proxy endpoint. Currently limited to logged-
+ * in users with access to the editor.
+ *
+ * @author Evan Hildreth <me@eph.me>
+ * @since 2020-08-14
+ *
+ * @return boolean True if current user can access the deviantart proxy endpoint
+ */
+function proxy_deviantart_oembed_security() {
+	// Should only be used by logged-in users capable of using the editor.
+	return current_user_can( 'edit_posts' );
+}
+
 add_action( 'rest_api_init', function () {
 	register_rest_route( 'oddevan/v1', '/devArtProxy/', array(
-		'methods'  => 'GET',
-		'callback' => __NAMESPACE__ . '\proxy_deviantart_oembed',
+		'methods'             => 'GET',
+		'callback'            => __NAMESPACE__ . '\proxy_deviantart_oembed',
+		'permission_callback' => __NAMESPACE__ . '\proxy_deviantart_oembed_security',
 	) );
 } );
+
+/**
+ * Check to make sure this is a DeviantArt-related URL
+ *
+ * @author Evan Hildreth <me@eph.me>
+ * @since 2020-08-14
+ *
+ * @param string $url URL to check.
+ * @return bool true if URL is valid
+ */
+function is_valid_url( $url ) {
+	$server = wp_parse_url( $url, PHP_URL_HOST );
+
+	// parse_url will return false if $url is not a URL.
+	if ( ! $server ) {
+		return false;
+	}
+
+	$allowed_domains = [
+		'deviantart.com',
+		'fav.me',
+		'sta.sh',
+	];
+
+	foreach ( $allowed_domains as $domain ) {
+		if ( 0 === substr_compare( $server, $domain, -strlen( $domain ) ) ) {
+			return true;
+		}
+	}
+	return false;
+}
