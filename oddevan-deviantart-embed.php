@@ -1,9 +1,11 @@
 <?php
 /**
  * Plugin Name:     oddEvan DeviantArt Embed
- * Description:     A starter plugin for Gutenberg blocks development.
- * Version:         0.1.0
+ * Plugin URI:      https://github.com/oddevan/oddevan-deviantart-embed
+ * Description:     Embed a work from DeviantArt into a post using the block editor.
+ * Version:         1.0.0
  * Author:          oddEvan
+ * Author URI:      https://eph.me/
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:     oddevan-deviantart-embed
