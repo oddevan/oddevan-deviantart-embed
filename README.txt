@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== oddEvan DeviantArt Embed ===
 Contributors: oddevan
 Tags: embed, deviantart
 Requires at least: 5.3
