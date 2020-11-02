@@ -8,13 +8,13 @@ import DaLogo from './DaLogo';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
-registerBlockType( 'oddevan/deviant-art-embed', {
-	title: __( 'Deviant Art', 'deviant-art-embed' ),
+registerBlockType( 'oddevan/deviantart-embed', {
+	title: __( 'DeviantArt', 'oddevan-deviantart-embed' ),
 	icon: DaLogo,
 	category: 'embed',
 	keywords: [
-		__( 'oddEvan', 'deviant-art-embed' ),
-		__( 'deviant-art-embed', 'deviant-art-embed' ),
+		__( 'oddEvan', 'oddevan-deviantart-embed' ),
+		__( 'deviantart embed', 'oddevan-deviantart-embed' ),
 	],
 	attributes: {
 		embedUrl: {

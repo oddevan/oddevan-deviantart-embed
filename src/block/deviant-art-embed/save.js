@@ -74,7 +74,7 @@ const Save = ( props ) => {
 					<a href={embedUrl}>
 						{title}
 					</a>
-					{__(' by ', 'deviant-art-embed')}
+					{__(' by ', 'oddevan-deviantart-embed')}
 					<a href={author_url}>
 						{author_name}
 					</a>

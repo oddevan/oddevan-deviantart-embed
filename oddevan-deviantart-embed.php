@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name:     oddEvan Deviant Art Embed
+ * Plugin Name:     oddEvan DeviantArt Embed
  * Description:     A starter plugin for Gutenberg blocks development.
  * Version:         0.1.0
  * Author:          oddEvan
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:     deviant-art-embed
+ * Text Domain:     oddevan-deviantart-embed
  *
  * @package         oddEvan\DeviantArtEmbed
  */
@@ -36,7 +36,7 @@ function register_block() {
 
 	// Verify we have an editor script.
 	if ( ! file_exists( plugin_dir_path( __FILE__ ) . $editor_script ) ) {
-		wp_die( esc_html__( 'Whoops! You need to run `npm run build` for the oddEvan Deviant Art Embed first.', 'deviant-art-embed' ) );
+		wp_die( esc_html__( 'Whoops! You need to run `npm run build` for the oddEvan Deviant Art Embed first.', 'oddevan-deviantart-embed' ) );
 	}
 
 	// Autoload dependencies and version.
