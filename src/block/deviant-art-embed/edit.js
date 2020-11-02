@@ -51,7 +51,7 @@ const Edit = ( props ) => {
 		<div className={className}>
 			<div className="oddevan-deviantart-control">
 				<TextControl
-					label={__('DeviantArt post', 'deviant-art-embed')}
+					label={__('DeviantArt post', 'oddevan-deviantart-embed')}
 					value={embedUrl}
 					onChange={(embedUrl) => setAttributes({ embedUrl })}
 				/>
@@ -79,7 +79,7 @@ const Edit = ( props ) => {
 						<a href={embedUrl}>
 							{title}
 						</a>
-						{__(' by ', 'deviant-art-embed')}
+						{__(' by ', 'oddevan-deviantart-embed')}
 						<a href={author_url}>
 							{author_name}
 						</a>
