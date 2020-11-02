@@ -1,0 +1,15 @@
+{
+	"name": "oddevan/deviantart-embed",
+	"title": "DeviantArt",
+	"category": "embed",
+	"description": "Embed a work from DeviantArt",
+	"keywords": [
+		"oddevan",
+		"deviant art",
+		"embed"
+	],
+	"textdomain": "oddevan-deviantart-embed",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/editor.css",
+	"style": "file:./build/style.css"
+}
