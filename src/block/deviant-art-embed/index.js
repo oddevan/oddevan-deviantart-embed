@@ -8,7 +8,7 @@ import DaLogo from './DaLogo';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
-registerBlockType( 'oddevan/deviantart-embed', {
+const blockInfo = {
 	title: __( 'DeviantArt', 'oddevan-deviantart-embed' ),
 	icon: DaLogo,
 	category: 'embed',
@@ -27,4 +27,6 @@ registerBlockType( 'oddevan/deviantart-embed', {
 	},
 	edit,
 	save,
-} );
+}
+
+// registerBlockType( 'oddevan/deviantart-embed', blockInfo );
