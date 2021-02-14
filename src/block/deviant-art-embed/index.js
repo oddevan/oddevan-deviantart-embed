@@ -3,19 +3,13 @@
  */
 import edit from './edit';
 import save from './save';
-import DaLogo from './DaLogo';
 
 import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 
 const blockInfo = {
-	title: __( 'DeviantArt', 'oddevan-deviantart-embed' ),
-	icon: DaLogo,
-	category: 'embed',
-	keywords: [
-		__( 'oddEvan', 'oddevan-deviantart-embed' ),
-		__( 'deviantart embed', 'oddevan-deviantart-embed' ),
-	],
+	title: __( 'Depreciated', 'oddevan-deviantart-embed' ),
+	category: '',
 	attributes: {
 		embedUrl: {
 			type: 'string'
@@ -25,8 +19,21 @@ const blockInfo = {
 			default: {}
 		},
 	},
+	transforms: {
+		to: [
+			{
+				type: 'block',
+				blocks: [ 'core/embed' ],
+				transform: ( { embedUrl } ) => {
+					return createBlock( 'core/embed', {
+						url: embedUrl,
+					} );
+				},
+			},
+		]
+	},
 	edit,
 	save,
 }
 
-// registerBlockType( 'oddevan/deviantart-embed', blockInfo );
+registerBlockType( 'oddevan/deviantart-embed', blockInfo );

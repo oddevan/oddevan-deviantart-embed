@@ -1,21 +1,20 @@
 /**
  * REGISTER: oddEvan Deviant Art Embed.
  */
-// import edit from './edit';
-// import save from './save';
 import DaLogo from './DaLogo';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockVariation } from '@wordpress/blocks';
 
 registerBlockVariation( 'core/embed', {
-	name: 'deviantart',
+	name: 'oddevan-deviantart',
 	title: __( 'DeviantArt', 'oddevan-deviantart-embed' ),
 	icon: DaLogo,
 	category: 'embed',
 	keywords: [
 		__( 'oddEvan', 'oddevan-deviantart-embed' ),
-		__( 'deviantart embed', 'oddevan-deviantart-embed' ),
+		__( 'deviant art', 'oddevan-deviantart-embed' ),
+		__( 'image', 'oddevan-deviantart-embed' ),
 	],
 	patterns: [
 		/^https?:\/\/([\w-]+\.)?deviantart\.com\/.+/i,
